@@ -106,6 +106,53 @@ def is_balanced(expression):
     if state == "q2" and not extra:
         success_message()
 
+
+def evaluate(expression):
+    xStack = [0]
+    
+    while expression:
+        if expression[0] == "x":
+            xStack[0] += 1
+            expression = expression[1:]
+        elif expression[0] == "<":
+            xStack.insert(0, 0)
+            expression = expression[1:]
+        elif expression[0] == "{":
+            xStack.insert(0, 0)
+            expression = expression[1:]
+        elif expression[0] == "[":
+            xStack.insert(0, 0)
+            expression = expression[1:]
+        elif expression[0] == "(":
+            xStack.insert(0, 0)
+            expression = expression[1:]
+        elif expression[0] == ">":
+            xStack[0] *= 2
+            xStack[1] += xStack[0]
+            xStack.pop(0)
+            expression = expression[1:]
+        elif expression[0] == "}":
+            xStack[0] += 1
+            xStack[1] += xStack[0]
+            xStack.pop(0)
+            expression = expression[1:]
+        elif expression[0] == "]":
+            xStack.pop(0)
+            expression = expression[1:]
+        elif expression[0] == ")":
+            xStack[0] -= 1 if xStack[0] > 0 else 0
+            xStack[1] += xStack[0]
+            xStack.pop(0)
+            expression = expression[1:]
+        else:
+            expression = expression[1:]
+    
+    print(f"Resulting number of x's: {xStack[0]}")
+
+
+
+
+
 # exp = input("Enter the expression: ")
 # is_balanced("john")
 
@@ -122,7 +169,9 @@ def is_balanced(expression):
 # is_balanced("![]")
 # is_balanced("!<a{[()]}a>!")
 # is_balanced("([]){}")
-is_balanced("!<x{[()]}x>!")
+# is_balanced("!<x{[()]}x>!")
+
+evaluate("!<x{[()]}x>!")
 
 # array = ["john", "alice"]
 # array.insert(0, "bob")
