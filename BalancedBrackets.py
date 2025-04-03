@@ -4,6 +4,7 @@ def is_balanced(expression):
     position = 0
     extra = False
     displayExpression = expression
+    accepted = False
 
     def pos_error_message():
         print(f"Invalid string. Failed at position {position}.")
@@ -105,6 +106,9 @@ def is_balanced(expression):
 
     if state == "q2" and not extra:
         success_message()
+        accepted = True
+    
+    return accepted
 
 
 def evaluate(expression):
@@ -150,29 +154,6 @@ def evaluate(expression):
     print(f"Resulting number of x's: {xStack[0]}")
 
 
-
-
-
-# exp = input("Enter the expression: ")
-# is_balanced("john")
-
-# exp = "i"
-# exp = exp[1:]
-
-# if (exp):
-#     print(exp)
-# else:
-#     print("Fail")
-
-# is_balanced("!xx[x({xx})[xxx]x]<xxx>x!")
-# is_balanced("![<]>!")
-# is_balanced("![]")
-# is_balanced("!<a{[()]}a>!")
-# is_balanced("([]){}")
-# is_balanced("!<x{[()]}x>!")
-
-evaluate("!<x{[()]}x>!")
-
-# array = ["john", "alice"]
-# array.insert(0, "bob")
-# print(array[0])
+text = input("Enter the expression: ")
+print(is_balanced(text))
+evaluate(text)
